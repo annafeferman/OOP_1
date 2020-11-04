@@ -17,7 +17,7 @@ namespace Task_4
             Console.WriteLine(" ");
 
             Times times = new Times();
-            TimeSpan timespan_1 = times.TimePoints(hours, minutes, seconds);
+            TimeSpan timepoint_1 = times.TimePoints(hours, minutes, seconds);
 
             Console.WriteLine("Second timepoint: ");
 
@@ -32,17 +32,17 @@ namespace Task_4
             Console.WriteLine("Timepoint in seconds: ");
 
             string TimeSeconds = Console.ReadLine();
-            TimeSpan timespan_sec = times.TimePoints(seconds: TimeSeconds);
+            TimeSpan timeInSec = times.TimePoints(seconds: TimeSeconds);
 
-            TimeSpan timespan_2 = times.TimePoints(hours_2, minutes_2, seconds_2);
+            TimeSpan timepoint_2 = times.TimePoints(hours_2, minutes_2, seconds_2);
 
             Console.WriteLine(" ");
-            Console.WriteLine($"Timepoints addition: {times.TimeAddition(timespan_1, timespan_2)}");
-            Console.WriteLine($"Timepoints substraction: {times.TimeSubtraction(timespan_1, timespan_2)}");
-            Console.WriteLine($"First timepoint in seconds: {times.TimeToSeconds(timespan_1)}");
-            Console.WriteLine($"Second timepoint in seconds: {times.TimeToSeconds(timespan_2)}");
+            Console.WriteLine($"Timepoints addition: {times.TimeAddition(timepoint_1, timepoint_2)}");
+            Console.WriteLine($"Timepoints substraction: {times.TimeSubtraction(timepoint_1, timepoint_2)}");
+            Console.WriteLine($"First timepoint in seconds: {times.TimeToSeconds(timepoint_1)}");
+            Console.WriteLine($"Second timepoint in seconds: {times.TimeToSeconds(timepoint_2)}");
 
-            Console.WriteLine($"Full time from seconds: {times.ConverterToFullTime(timespan_sec)}");
+            Console.WriteLine($"Full time from seconds: {times.ConverterToFullTime(timeInSec)}");
         }
     }
 }

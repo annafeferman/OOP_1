@@ -20,7 +20,7 @@ namespace Task_4
         }
         public TimeSpan TimePoints(string hours = "0", string minutes = "0", string seconds = "0")
         {
-            string[] stringData = { hours, minutes, seconds };
+            string[] stringData = {hours, minutes, seconds};
             for (int i = 0; i < stringData.Length; i++)
             {
                 try
