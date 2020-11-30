@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Task_6
 {
@@ -59,7 +60,17 @@ namespace Task_6
                     if (array[i, a] > maxs[i])
                         maxs[i] = array[i, a];
                 maxValue = maxs[i];
-                Console.WriteLine("Max element in the {0} line is: {1}.", i+1, maxValue);
+                Console.WriteLine("Max element in the {0} line is: {1}.", i + 1, maxValue);
+                for (int k = 0; k < numberOfRows; k++)
+                {
+                    for (int j = 0; j < numberOfColumns; j++)
+                    {
+                        if (myArray[k, j] == maxValue)
+                        {
+                            Console.WriteLine("The index is: {" + k + "}" + "{" + j + "}");
+                        }
+                    }
+                }
             }
         }
 
