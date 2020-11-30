@@ -29,11 +29,11 @@ namespace Task_7
             {
                 try
                 {
-                    Console.Write("\nInput a day: ");
+                    Console.Write("Input a day: ");
                     day = Convert.ToInt32(Console.ReadLine());
-                    if ((day <= 0) || (day > 28))
+                    if ((day <= 0) || (day > 31))
                     {
-                        Console.WriteLine("It is only 28 days in February");
+                        Console.WriteLine("It is only 31 days in March");
                         Console.WriteLine(" ");
                     }
                     else
@@ -51,8 +51,8 @@ namespace Task_7
             {
                 try
                 {
-                    Console.WriteLine("Choose the weather type: \nНе визначено - 0\nДощ - 1\nКороткочасний дощ - 2\n" +
-                                        "Гроза - 3\nСніг - 4\nТуман - 5\nПохмуро - 6\nСонячно - 7\n");
+                    Console.WriteLine("\nChoose the weather type: \nNot defined - 0\nRain - 1\nShort rain - 2\n" +
+                                        "Thunder - 3\nSnow - 4\nFog - 5\nCloudy - 6\nSunny - 7\n");
                     weatherType = Convert.ToInt32(Console.ReadLine());
                     if (weatherType > 1 | weatherType < 7)
                     {
@@ -74,7 +74,7 @@ namespace Task_7
             {
                 try
                 {
-                    Console.Write("Input day temperature in " + day + " day: ");
+                    Console.Write("\nInput day temperature in " + day + " day: ");
                     averageDayTemp = Convert.ToDouble(Console.ReadLine());
                     if ((averageDayTemp < -20) || (averageDayTemp > 60))
                     {
@@ -142,6 +142,7 @@ namespace Task_7
                 {
                     Console.Write("Input average fallout in " + day + " day: ");
                     fallout = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine(" ");
                     if ((fallout < 0) || (fallout > 1000))
                     {
                         Console.WriteLine("Probably, you've input the wrong fallout quantity");
@@ -220,7 +221,7 @@ namespace Task_7
         }
         public class WeatherDays
         {
-            private WeatherParametersDay[] FebruaryArray = new WeatherParametersDay[28];
+            private WeatherParametersDay[] MarchArray = new WeatherParametersDay[31];
             public void FileOrKeyboard()
             {
                 string choice;
@@ -228,23 +229,23 @@ namespace Task_7
                 {
                     try
                     {
-                        Console.WriteLine("Type 1 to enter data manually and 2 to read from file: ");
+                        Console.Write("Type 1 to enter data manually and 2 to read from file: ");
                         choice = Console.ReadLine();
                         switch (choice)
                         {
                             case "1":
                                 ReadFromKeyboard();
                                 DataOutput();
-                                SunnyDays();
-                                RainAndThunder();
-                                MinMaxNightTemp();
+                                CloudyDays();
+                                DaysWithoutFallouts();
+                                AverageNightTemp();
                                 break;
                             case "2":
                                 ReadFromFile();
                                 DataOutput();
-                                SunnyDays();
-                                RainAndThunder();
-                                MinMaxNightTemp();
+                                CloudyDays();
+                                DaysWithoutFallouts();
+                                AverageNightTemp();
                                 break;
                             default:
                                 Console.WriteLine("Input only 1 or 2");
@@ -271,16 +272,16 @@ namespace Task_7
                         count++;
                     }
                     int numberOfRows = count;
-                    if (numberOfRows != 28)
+                    if (numberOfRows != 31)
                     {
-                        Console.WriteLine("\nFebruary has 28 days.");
+                        Console.WriteLine("\nMarch has 31 days.");
                     }
                     else
                     {
                         for (int i = 0; i < numberOfRows; i++)
                         {
                             WeatherParametersDay day = new WeatherParametersDay();
-                            FebruaryArray[i] = day;
+                            MarchArray[i] = day;
                             day.FileDataReading(sr);
                         }
                     }
@@ -293,65 +294,58 @@ namespace Task_7
 
             public void ReadFromKeyboard()
             {
-                for (int i = 0; i < 28; i++)
+                for (int i = 0; i < 31; i++)
                 {
                     WeatherParametersDay day = new WeatherParametersDay();
-                    FebruaryArray[i] = day;
+                    MarchArray[i] = day;
                     day.KeyboardInput();
                 }
             }
 
-            public void SunnyDays()
-            {
-                int counter = 0;
-                for (int i = 0; i < 28; i++)
-                {
-                    if (FebruaryArray[i].GetWeatherKey() == 7)
-                    {
-                        counter++;
-                    }
-                }
-                Console.WriteLine($"\nNumber of sunny days: {counter}.");
-            }
-            public void RainAndThunder()
+            public void CloudyDays()
             {
                 int counter = 0;
                 for (int i = 0; i < 31; i++)
                 {
-                    if (FebruaryArray[i].GetWeatherKey() == 1 || FebruaryArray[i].GetWeatherKey() == 2 || FebruaryArray[i].GetWeatherKey() == 3)
+                    if (MarchArray[i].GetWeatherKey() == 6)
                     {
                         counter++;
                     }
                 }
-                Console.WriteLine($"\nNumber of days with rain or thunder: {counter}.");
+                Console.WriteLine($"\nNumber of cloudy days: {counter}.");
             }
-            public void MinMaxNightTemp()
+            public void DaysWithoutFallouts()
             {
-                double min = 100;
-                double max = -100;
-
-                for (int i = 0; i < 28; i++)
+                int counter = 0;
+                for (int i = 0; i < 31; i++)
                 {
-                    if (FebruaryArray[i].GetDayTemp() <= min)
+                    if (MarchArray[i].GetWeatherKey() == 3 || MarchArray[i].GetWeatherKey() == 5 || MarchArray[i].GetWeatherKey() == 6 || MarchArray[i].GetWeatherKey() == 7)
                     {
-                        min = FebruaryArray[i].GetDayTemp();
-                    }
-                    if (FebruaryArray[i].GetDayTemp() >= max)
-                    {
-                        max = FebruaryArray[i].GetDayTemp();
+                        counter++;
                     }
                 }
-                Console.WriteLine("Maximal day temperature in February: " + max);
-                Console.WriteLine("Minimal day temperature in February: " + min);
+                Console.WriteLine($"Number of days without fallouts: {counter}.");
+            }
+            public void AverageNightTemp()
+            {
+                double sumNightTemp = 0;
+                double averageNightTemp;
+
+                for (int i = 0; i < 31; i++)
+                {
+                    sumNightTemp += MarchArray[i].GetNightTemp();
+                }
+                averageNightTemp = sumNightTemp / 31;
+                Console.WriteLine("Average night temperature in March: " + averageNightTemp + ".");
             }
 
             public void DataOutput()
             {
-                Console.WriteLine("\nДень \tТип погоди \tДенна темп-ра (C) \tНічна темп-ра (C) \tАтмосферний тиск \tКількість опадів");
+                Console.WriteLine("\nDay \tWeather Type \tDay temperature \tNight temperature \tAtmosphere pressure \tFallouts");
                 Console.WriteLine();
-                for (int i = 0; i < FebruaryArray.Length; i++)
+                for (int i = 0; i < MarchArray.Length; i++)
                 {
-                    Console.WriteLine($"{FebruaryArray[i].GetDayNumber()}\t{FebruaryArray[i].GetWeather()}\t\t\t{FebruaryArray[i].GetDayTemp()}\t\t\t{FebruaryArray[i].GetNightTemp()}\t\t\t{FebruaryArray[i].GetAtmPressure()}\t\t\t{FebruaryArray[i].GetFallout()}");
+                    Console.WriteLine($"{MarchArray[i].GetDayNumber()}\t{MarchArray[i].GetWeather()}\t\t\t{MarchArray[i].GetDayTemp()}\t\t\t{MarchArray[i].GetNightTemp()}\t\t\t{MarchArray[i].GetAtmPressure()}\t\t\t{MarchArray[i].GetFallout()}");
                 }
             }
         }
