@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 
 namespace Task_6
 {
@@ -8,7 +7,6 @@ namespace Task_6
         private static int numberOfRows;
         private static int numberOfColumns;
         private static int maxValue;
-        private static int maxValueIndex;
         private static int[,] myArray;
 
         public static void ArraySizeInput()
@@ -34,7 +32,7 @@ namespace Task_6
         public static void FormArray()
         {
             myArray = new int[numberOfRows, numberOfColumns];
- 
+
             Random random = new Random();
             Console.WriteLine(" ");
             Console.WriteLine("Your array:");
