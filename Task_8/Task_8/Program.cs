@@ -16,79 +16,63 @@ namespace Task_8
         {
             get
             {
-                if (type == "realValue")
+                if (type == "realPart")
                 {
                     return Re;
                 }
                 else { return Im; }
             }
-            set
-            {
-
-            }
         }
 
         public static MyComplex operator +(MyComplex a, MyComplex b)
         {
-            MyComplex res = new MyComplex();
-            res.Re = a.Re + b.Re;
-            res.Im = a.Im + b.Im;
+            MyComplex res = new MyComplex(a.Re + b.Re, a.Im + b.Im);
             return res;
         }
 
         public static MyComplex operator +(MyComplex a, double b)
         {
-            MyComplex res = new MyComplex();
-            res.Re = a.Re + b;
-            res.Im = a.Im;
+            MyComplex res = new MyComplex(a.Re + b, a.Im);
             return res;
         }
         public static MyComplex operator +(double b, MyComplex a)
         {
-            MyComplex res = new MyComplex
             {
-                Re = a.Re + b,
-                Im = a.Im
-            };
-            return res;
+                MyComplex res = new MyComplex(b + a.Re, a.Im);
+                return res;
+            }
         }
-
         public static MyComplex operator -(MyComplex a, MyComplex b)
         {
-            MyComplex res = new MyComplex
             {
-                Re = a.Re - b.Re,
-                Im = a.Im - b.Im
-            };
-            return res;
+                MyComplex res = new MyComplex(a.Re - b.Re, a.Im - b.Im);
+                return res;
+            }
         }
         public static MyComplex operator -(MyComplex a)
         {
-            MyComplex res = new MyComplex
+            
             {
-                Re = a.Re * -1,
-                Im = a.Im
-            };
-            return res;
+                MyComplex res = new MyComplex(a.Re * -1, a.Im * -1);
+                return res;
+            }
         }
         public static MyComplex operator *(MyComplex a, int i)
         {
-            MyComplex res = new MyComplex();
-            res.Re = a.Re * i;
-            res.Im = a.Im;
+            MyComplex res = new MyComplex(a.Re * i, a.Im);
             return res;
         }
 
         public void InputFromTerminal()
         {
-            Re = IfValid("Real part");
-            Im = IfValid("Image part");
+            Re = IfValid("real part");
+            Im = IfValid("image part");
         }
         private double IfValid(string text)
         {
             while (true)
             {
-                Console.Write($"Input {text} your number: ");
+                Console.Write($"Input the {text} of your number: ");
                 try
                 {
                     return Convert.ToDouble(Console.ReadLine());
@@ -104,6 +88,13 @@ namespace Task_8
             if (Im > 0)
             {
                 return $"{Re}+{Im}i";
+            }
+            else
+            {
+                if(Im == 0)
+                {
+                    return $"{Re}";
+                }
             }
 
             return $"{Re}{Im}i";
@@ -129,10 +120,10 @@ namespace Task_8
 
             Console.WriteLine($"A = {A}, B = {B}, C = {C}, D = {D}");
 
-            Console.WriteLine($"Re(A) = {A["realValue"]}, Im(A) = {A["imaginaryValue"]}");
-            Console.WriteLine($"Re(B) = {B["realValue"]}, Im(B) = {B["imaginaryValue"]}");
-            Console.WriteLine($"Re(C) = {C["realValue"]}, Im(C) = {C["imaginaryValue"]}");
-            Console.WriteLine($"Re(D) = {D["realValue"]}, Im(D) = {D["imaginaryValue"]}");
+            Console.WriteLine($"Re(A) = {A["realPart"]}, Im(A) = {A["imaginaryPart"]}");
+            Console.WriteLine($"Re(B) = {B["realPart"]}, Im(B) = {B["imaginaryPart"]}");
+            Console.WriteLine($"Re(C) = {C["realPart"]}, Im(C) = {C["imaginaryPart"]}");
+            Console.WriteLine($"Re(D) = {D["realPart"]}, Im(D) = {D["imaginaryPart"]}");
         }
     }
 }
