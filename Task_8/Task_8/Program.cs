@@ -55,16 +55,20 @@ namespace Task_8
 
         public static MyComplex operator -(MyComplex a, MyComplex b)
         {
-            MyComplex res = new MyComplex();
-            res.Re = a.Re - b.Re;
-            res.Im = a.Im - b.Im;
+            MyComplex res = new MyComplex
+            {
+                Re = a.Re - b.Re,
+                Im = a.Im - b.Im
+            };
             return res;
         }
         public static MyComplex operator -(MyComplex a)
         {
-            MyComplex res = new MyComplex();
-            res.Re = a.Re * -1;
-            res.Im = a.Im;
+            MyComplex res = new MyComplex
+            {
+                Re = a.Re * -1,
+                Im = a.Im
+            };
             return res;
         }
         public static MyComplex operator *(MyComplex a, int i)
